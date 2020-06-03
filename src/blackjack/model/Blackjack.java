@@ -110,6 +110,7 @@ public class Blackjack implements Game {
 
     /**
      * draws cards for the dealer until he chooses to stay
+     * sets GameState to finish because this is always the last action of a game
      */
     void dealerTurns() {
         while (true) {
@@ -229,7 +230,8 @@ public class Blackjack implements Game {
                 break;
             case HIT:
                 human.addCard(drawCard());
-                printGameState();
+                if (human.isBusted()) this.state = GameState.FINISHED;
+                if (human.hasBlackJack()) dealerTurns();
                 break;
             case DOUBLE_DOWN:
                 if (human.getChips() < human.getWager()) {
@@ -242,12 +244,6 @@ public class Blackjack implements Game {
                     dealerTurns();
                 }
                 break;
-        }
-        if (human.isBusted()) {
-            this.state = GameState.FINISHED;
-        }
-        if (human.hasBlackJack()) {
-            dealerTurns();
         }
         if (this.state == GameState.FINISHED) {
             distributeWinnings();

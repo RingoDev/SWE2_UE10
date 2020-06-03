@@ -32,12 +32,9 @@ public class App {
      */
     public App(Game model) {
         this.model = model;
-        Listener gameListener = new Listener() {
-            @Override
-            public void update(Event e) {
-                System.out.println("updated");
-                setLabelText(e);
-            }
+        Listener gameListener = e -> {
+            System.out.println("updated");
+            setLabelText(e);
         };
 
         model.addGameListener(gameListener);
@@ -53,9 +50,11 @@ public class App {
         contentPane.add(view, BorderLayout.CENTER);
 
         JPanel statePanel = new JPanel();
+        statePanel.setLayout(new BorderLayout());
+        statePanel.setBorder(BorderFactory.createTitledBorder("Message"));
         this.stateLbl = new JLabel(preGameMsg());
         statePanel.setLayout(new FlowLayout());
-        statePanel.add(stateLbl);
+        statePanel.add(stateLbl,BorderLayout.CENTER);
         contentPane.add(statePanel, BorderLayout.SOUTH);
 
         frame.pack();

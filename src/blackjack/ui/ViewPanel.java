@@ -49,6 +49,7 @@ public class ViewPanel extends JPanel {
                 playPanel.setVisible(true);
                 buttonPanel.setVisible(false);
             }
+
             if (e.getState() == GameState.RUNNING) {
 
                 // removes the mouseListener from the view
@@ -60,8 +61,8 @@ public class ViewPanel extends JPanel {
 
                 // makes sure the DoubleDown button is visible
                 doubleDown.setVisible(true);
-
             }
+
             if (e.getState() == GameState.FINISHED) {
 
                 // adds the mouseListener to the view
