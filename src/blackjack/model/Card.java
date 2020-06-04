@@ -34,11 +34,6 @@ public class Card {
 		index = 1 + deckIndex % 13;
 	}
 
-	public Card(Color color, int value) {
-		this.color = color;
-		this.index = value;
-	}
-
 	public Color getColor(){
 		return this.color;
 	}

@@ -60,7 +60,8 @@ public interface Game {
     void dealStarterCards() throws OutOfMoneyException;
 
     /**
-     * starts a new game
+     * starts a new game with a certain amount of chips
      */
-    void startGame();
+    void startGame(int chips);
+
 }

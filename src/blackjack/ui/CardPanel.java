@@ -33,37 +33,39 @@ public class CardPanel extends JComponent {
     public void drawHand() {
 
         List<Card> cards = player.getCards();
-        int w = getWidth();
-        int cardWidth = w / 6;
-        int cardHeight = (int) (cardWidth / 0.6);
+        int h = getHeight();
+        int cardHeight = (int) (h / 1.5);
+        int cardWidth = (int) (cardHeight * 0.7);
         for (int i = 0; i < cards.size(); i++) {
-            drawCard(i,cardWidth,cardHeight,cards);
+            drawCard(i, cardWidth, cardHeight, cards);
         }
     }
 
     /**
      * draws a card
-     * @param i the index of the card in the hand
-     * @param cardWidth the width of the card
+     *
+     * @param i          the index of the card in the hand
+     * @param cardWidth  the width of the card
      * @param cardHeight the height of the card
-     * @param cards the cards of the player
+     * @param cards      the cards of the player
      */
-    public void drawCard(int i, int cardWidth, int cardHeight,List<Card> cards){
+    public void drawCard(int i, int cardWidth, int cardHeight, List<Card> cards) {
         g2D.setColor(Color.white);
         g2D.fillRect(i * 50, 10, cardWidth, cardHeight);
         g2D.setColor(cards.get(i).getColor() == Card.Color.Clubs || cards.get(i).getColor() == Card.Color.Spades ? Color.BLACK : Color.RED);
-        g2D.setFont(new Font("TimesRoman", Font.PLAIN, 17));
-        g2D.drawString(cards.get(i).toString(), i * 50 + 10, 35);
+        g2D.setFont(new Font("TimesRoman", Font.PLAIN, cardHeight / 10));
+        g2D.drawString(cards.get(i).toString(), i * 50 + 10, 10 + cardHeight / 6);
 
         paintBorder(g2D, i * 50, 10, cardWidth, cardHeight);
     }
 
     /**
      * draws a black border around the card
-     * @param g the 2D Graphics
-     * @param x x-Coordinate of the card
-     * @param y y-Coordinate of the card
-     * @param width the width of the card
+     *
+     * @param g      the 2D Graphics
+     * @param x      x-Coordinate of the card
+     * @param y      y-Coordinate of the card
+     * @param width  the width of the card
      * @param height the height of the card
      */
     public void paintBorder(Graphics g, int x, int y,

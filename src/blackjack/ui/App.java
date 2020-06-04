@@ -14,7 +14,9 @@ public class App {
     private final Game model;
     private final ViewPanel view;
     private final JLabel stateLbl;
-
+    private final JPanel statePanel;
+    private final JFrame frame;
+    private final Container contentPane;
 
     /**
      * Main method starting the application.
@@ -32,29 +34,29 @@ public class App {
      */
     public App(Game model) {
         this.model = model;
-        Listener gameListener = e -> {
-            System.out.println("updated");
-            setLabelText(e);
-        };
+        this.model.addGameListener(this::setLabelText);
 
-        model.addGameListener(gameListener);
-
-        JFrame frame = new JFrame("Blackjack");
+        frame = new JFrame("Blackjack");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setJMenuBar(createMenu());
 
-        Container contentPane = frame.getContentPane();
-        contentPane.setLayout(new BorderLayout(10, 10));
+        contentPane = frame.getContentPane();
+        contentPane.setLayout(new BorderLayout(10, 0));
 
-        this.view = new ViewPanel(model);
-        contentPane.add(view, BorderLayout.CENTER);
+        view = new ViewPanel(model);
 
-        JPanel statePanel = new JPanel();
+        //creating Message Box
+        statePanel = new JPanel();
         statePanel.setLayout(new BorderLayout());
         statePanel.setBorder(BorderFactory.createTitledBorder("Message"));
-        this.stateLbl = new JLabel(preGameMsg());
+        statePanel.setBackground(new Color(53, 101, 77));
         statePanel.setLayout(new FlowLayout());
-        statePanel.add(stateLbl,BorderLayout.CENTER);
+
+        stateLbl = new JLabel(preGameMsg());
+        statePanel.add(stateLbl, BorderLayout.CENTER);
+
+        // adding to contentPane of Frame
+        contentPane.add(view, BorderLayout.CENTER);
         contentPane.add(statePanel, BorderLayout.SOUTH);
 
         frame.pack();

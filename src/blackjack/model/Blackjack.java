@@ -3,8 +3,6 @@ package blackjack.model;
 import blackjack.model.player.Dealer;
 import blackjack.model.player.HumanPlayer;
 
-import inout.Out;
-
 
 import javax.swing.event.EventListenerList;
 import java.util.ArrayList;
@@ -69,7 +67,6 @@ public class Blackjack implements Game {
      */
     public void FullReset() {
         PlayerReset();
-        setStartingChips();
         state = GameState.NOTSTARTED;
         fireEvent();
     }
@@ -118,7 +115,6 @@ public class Blackjack implements Game {
                 break;
             } else {
                 dealer.addCard(drawCard());
-                printGameState();
             }
         }
         this.state = GameState.FINISHED;
@@ -136,9 +132,8 @@ public class Blackjack implements Game {
     /**
      * sets the chips for this game
      */
-    public void setStartingChips() {
-        int chipStack = 10;// can be modified to take different startingStacks as input
-        human.setChips(chipStack);
+    public void setStartingChips(int chips) {
+        human.setChips(chips);
     }
 
     /**
@@ -161,11 +156,11 @@ public class Blackjack implements Game {
     /**
      * starts a new game
      */
-    public void startGame() {
+    public void startGame(int chips) {
 
         this.state = GameState.RUNNING;
 
-        setStartingChips();
+        setStartingChips(chips);
 
         shuffle();
 
@@ -193,9 +188,7 @@ public class Blackjack implements Game {
         human.addCard(drawCard());
         human.addCard(drawCard());
 
-        printGameState();
-
-        // starts dealerturns and sets gamestate to finished
+        // starts dealerTurns and sets GameState to finished
         if (human.hasBlackJack()) {
             dealerTurns();
             distributeWinnings();
@@ -240,7 +233,6 @@ public class Blackjack implements Game {
                     human.addCard(drawCard());
                     human.setChips(human.getChips() - human.getWager());
                     human.setWager(human.getWager() * 2);
-                    printGameState();
                     dealerTurns();
                 }
                 break;
@@ -249,24 +241,5 @@ public class Blackjack implements Game {
             distributeWinnings();
         }
         fireEvent();
-    }
-
-    /**
-     * print the cards of both players and their value
-     */
-    public void printGameState() {
-        Out.println("Dealer (" + dealer.getValue() + ")");
-
-        for (Card c : dealer.getCards()) {
-            Out.print(c + " ");
-        }
-        Out.println();
-
-        Out.println("Player (" + human.getValue() + ")");
-
-        for (Card c : human.getCards()) {
-            Out.print(c + " ");
-        }
-        Out.println("\n");
     }
 }
