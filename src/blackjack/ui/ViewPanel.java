@@ -31,6 +31,7 @@ public class ViewPanel extends JPanel {
     private JButton play;
     private JLabel chipsText;
     private JTextField startingChips;
+    private JPanel dealerScoreWrapper;
 
     /**
      * Constructor initializing the model and setting up this view.
@@ -81,9 +82,9 @@ public class ViewPanel extends JPanel {
         this.setBorder(new EmptyBorder(20, 20, 20, 20));
 
 
-        mouseListener = new MouseListener();
+        this.mouseListener = new MouseListener();
 
-        JPanel dealerScoreWrapper = new JPanel();
+        dealerScoreWrapper = new JPanel();
         dealerScoreWrapper.setLayout(new FlowLayout(FlowLayout.LEFT));
         dealerScore = new JLabel();
         dealerScoreWrapper.add(dealerScore);

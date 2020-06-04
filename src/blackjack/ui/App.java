@@ -110,19 +110,19 @@ public class App {
         StringBuilder sb = new StringBuilder();
         switch (this.model.evaluateCards()) {
             case DEALER_WINS:
-                sb.append("You just lost ").append(+this.model.getHuman().getLastWager()).append(this.model.getHuman().getLastWager() > 1 ? " Chips. " : " Chip. ");
+                sb.append("You lost ").append(+this.model.getHuman().getLastWager()).append(this.model.getHuman().getLastWager() > 1 ? " Chips. " : " Chip. ");
                 break;
             case PLAYER_WINS:
                 if (this.model.getHuman().hasBlackJack())
                     sb.append("You made a Blackjack and won ").append(this.model.getHuman().getLastWager() * 2).append(this.model.getHuman().getLastWager() * 2 > 1 ? " Chips. " : " Chip. ");
                 else
-                    sb.append("You just won ").append(this.model.getHuman().getLastWager()).append(this.model.getHuman().getLastWager() > 1 ? " Chips. " : " Chip. ");
+                    sb.append("You won ").append(this.model.getHuman().getLastWager()).append(this.model.getHuman().getLastWager() > 1 ? " Chips. " : " Chip. ");
                 break;
             case DRAW:
                 sb.append("This one was a draw. ");
                 break;
         }
-        return sb.append("Click anywhere to try again!").toString();
+        return sb.append("Click anywhere to play another round!").toString();
     }
 
     /**

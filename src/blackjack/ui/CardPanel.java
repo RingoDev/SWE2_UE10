@@ -51,12 +51,13 @@ public class CardPanel extends JComponent {
      */
     public void drawCard(int i, int cardWidth, int cardHeight, List<Card> cards) {
         g2D.setColor(Color.white);
-        g2D.fillRect(i * 50, 10, cardWidth, cardHeight);
+        g2D.fillRect(i * cardWidth/2, 10, cardWidth, cardHeight);
         g2D.setColor(cards.get(i).getColor() == Card.Color.Clubs || cards.get(i).getColor() == Card.Color.Spades ? Color.BLACK : Color.RED);
         g2D.setFont(new Font("TimesRoman", Font.PLAIN, cardHeight / 10));
-        g2D.drawString(cards.get(i).toString(), i * 50 + 10, 10 + cardHeight / 6);
+        System.out.println(cardWidth);
+        g2D.drawString(cards.get(i).toString(), i * cardWidth/2 + cardWidth/10, 10 + cardHeight / 6);
 
-        paintBorder(g2D, i * 50, 10, cardWidth, cardHeight);
+        paintBorder(g2D, i * cardWidth/2, 10, cardWidth, cardHeight);
     }
 
     /**
